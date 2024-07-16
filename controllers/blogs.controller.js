@@ -53,9 +53,41 @@ const deleteBlogWithId = async (req, res) => {
   }
 };
 
+const searchBlogs = async (req, res) => {
+  const { title: inputTitle, email: inputEmail } = req.query;
+  // const {a: y} = x;
+  // const y = x.a;
+
+  // Ask MongoDB for blogs with this title and author
+  const data = await Blogs.find({
+    $or: [
+      { title: inputTitle },
+      {
+        authors: {
+          $elemMatch: {
+            email: inputEmail,
+          },
+        },
+      },
+    ],
+  });
+
+  /* title: inputTitle, // We can also simply use "title" instead on "title: inputTitle"
+    authors: {
+      $elemMatch: {
+        // Like .includes()
+        email: inputEmail,
+      },
+    },
+  }); */
+
+  res.json(data);
+};
+
 module.exports = {
   createNewBlog,
   getAllBlogs,
   updateBlogWithId,
   deleteBlogWithId,
+  searchBlogs,
 };
