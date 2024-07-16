@@ -1,0 +1,14 @@
+###
+http://127.0.0.1:3000/currencies?min_value=1
+###
+http://127.0.0.1:3000/currencies
+###
+http://127.0.0.1:3000/currencies/inr
+###
+http://127.0.0.1:3000/users/
+###
+http://127.0.0.1:3000/users/search?gender=male&&age=52
+###
+http://127.0.0.1:3000/users/search
+###
+http://127.0.0.1:3000/users/468fa5aa-c00e-4f71-951f-607a79b26299
