@@ -1,15 +1,12 @@
 const Blogs = require("../models/blogs.model");
+const BlogService = require("../services/blogs.service");
+const BlogServiceInstancce = new BlogService();
 
 // Create
 const createNewBlog = async (req, res) => {
   try {
-    // Prepare
-    const blogDocument = new Blogs(req.body);
-
-    // Send to database
-    await blogDocument.save();
-
-    res.json(blogDocument);
+    const blog = await BlogServiceInstancce.create(req.body);
+    res.json(blog);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -18,7 +15,7 @@ const createNewBlog = async (req, res) => {
 // Read
 const getAllBlogs = async (req, res) => {
   try {
-    const blogs = await Blogs.find({});
+    const blogs = await BlogServiceInstancce.find();
     res.json(blogs);
   } catch (err) {
     res.status(500).json({ message: err.message });
